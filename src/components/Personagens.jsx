@@ -61,7 +61,7 @@ export default function Personagens({ apiUrl, folder, personagem }) {
                                 <h1 className="text-[#FFFF00] text-center font-inter text-xl">
                                     {personagem.name}
                                 </h1>
-                                <div className="fixed left-24 top-28 w-10 rounded-full text-white text-center bg-blue-900/40">
+                                <div className="absolute left-24 top-28 w-10 rounded-full text-white text-center bg-blue-900/40">
                                     <Link onClick={() => history.back()}>
                                         <ArrowBackIcon fontSize="large" />
                                     </Link>

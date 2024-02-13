@@ -29,7 +29,7 @@ export default function Planetas({ apiUrl, folder }) {
                 setPlanet(res.data.results);
                 setLoading(false);
                 console.log(res.data);
-                console.log(res.data.results[7].name);
+                console.log(res.data.results);
             } catch (error) {
                 console.error("Erro ao buscar dados:", error);
             }
@@ -62,7 +62,7 @@ export default function Planetas({ apiUrl, folder }) {
                                 <h1 className="text-[#FFFF00] text-center font-inter text-xl">
                                     {planeta.name}
                                 </h1>
-                                <div className="fixed left-24 top-28 w-10 rounded-full text-white text-center bg-blue-900/40">
+                                <div className="absolute left-24 top-28 w-10 rounded-full text-white text-center bg-blue-900/40">
                                     <Link onClick={() => history.back()}>
                                         <ArrowBackIcon fontSize="large" />
                                     </Link>

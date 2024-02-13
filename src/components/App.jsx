@@ -7,7 +7,7 @@ import Navbar from "./Navbar.jsx";
 import Home from "./Home.jsx";
 import PersonagensPage from "./PersonagensPage";
 import PlanetasPage from "./PlanetasPage.jsx";
-
+import NavesPage from "./NavesPage.jsx"
 
 function App() {
     // Lista de dados com informações sobre as rotas de personagens
@@ -95,6 +95,10 @@ function App() {
                             }
                         />
                     ))}
+                    <Route
+                        path="/naves/:nave/:imagem"
+                        element={<NavesPage />}
+                    />
                 </Routes>
             </Router>
         </div>

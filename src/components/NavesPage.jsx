@@ -1,80 +1,47 @@
-import Personagens from "./Personagens";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Cards from "./Cards";
 import CircularProgress from "@mui/joy/CircularProgress";
-import {
-    formatGender,
-    formatHairColor,
-    formatEyeColor,
-    formatSkinColor,
-    fetchVehicleNames,
-    fetchFilmTitles,
-    fetchSpeciesNames,
-    fetchShipsNames,
-    fetchHomeData,
-} from "./personagensPageUtil";
 import { Link } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import PlanetasPage from "./PlanetasPage.jsx";
+import { adjustIndex } from "./adjustIndex";
+import { fetchFilmTitles, fetchPilotsName } from "./navesPageutil.js";
 
-export default function PersonagensPage() {
+export default function NavesPage() {
     //Variaveis
     //Parametros de rota
 
-    const { personagem, imagem } = useParams();
+    const { nave, imagem } = useParams();
 
     //Imagem com path modificado que está sendo recebido dos Parametros de rota.
 
     const imagemRelativa = imagem.replace(".", "/src/components");
 
     // States settados para as informações do personagem.
-    const [char, setChar] = useState();
-    const [gender, setGender] = useState();
-    const [hair, setHair] = useState();
-    const [eyes, setEyes] = useState();
-    const [skin, setSkin] = useState();
-    const [vehicles, setVehicles] = useState([]);
-    const [films, setFilms] = useState([]);
-    const [ships, setShips] = useState([]);
-    const [species, setSpecies] = useState([]);
-    const [home, setHome] = useState();
+    const [ships, setShips] = useState();
     const [loading, setLoading] = useState(true);
+    const [films, setFilms] = useState([]);
+    const [peoples, setPeoples] = useState([]);
 
     // variaveis para gerar os links dos 82 personagens
-    const folder = imagem.slice(14, 15);
-    const indexImg = imagem.slice(16, 17);
-    let adjustedIndex = (parseInt(folder) - 1) * 10 + parseInt(indexImg) + 1;
-    const errorIndex = 17;
-    if (adjustedIndex >= errorIndex) {
-        adjustedIndex++;
-    }
+    const folder = imagem.slice(8, 9);
+    const indexImg = imagem.slice(10, 11);
+    let adjustedIndex = adjustIndex(folder, indexImg);
 
     //Função para gerar a URL da API com base no número do personagem
-    const generateAPIURL = (characterNumber) => {
-        return `https://swapi.dev/api/people/${characterNumber}/`;
+    const generateAPIURL = (shipNumber) => {
+        return `https://swapi.dev/api/starships/${shipNumber}/`;
     };
 
     useEffect(() => {
-        const getCharacter = async () => {
+        const getShips = async () => {
             try {
                 setLoading(true);
                 const res = await axios.get(generateAPIURL(adjustedIndex));
-                setChar(res.data);
-
-                //Chamadas para as informações
-                setGender(formatGender(res.data.gender));
-                setHair(formatHairColor(res.data.hair_color));
-                setEyes(formatEyeColor(res.data.eye_color));
-                setSkin(formatSkinColor(res.data.skin_color));
-                //Funções assincronas
-                await fetchVehicleNames(res, setVehicles);
-                await fetchFilmTitles(res, setFilms),
-                    await fetchSpeciesNames(res, setSpecies),
-                    await fetchShipsNames(res, setShips),
-                    await fetchHomeData(res.data.homeworld, setHome);
-                console.log(res.data.homeworld);
+                setShips(res.data);
+                await fetchFilmTitles(res, setFilms);
+                await fetchPilotsName(res, setPeoples);
                 console.log(res.data);
             } catch (error) {
                 console.error("Erro ao buscar dados:", error);
@@ -82,7 +49,7 @@ export default function PersonagensPage() {
                 setLoading(false);
             }
         };
-        getCharacter();
+        getShips();
     }, []);
 
     return (
@@ -96,28 +63,45 @@ export default function PersonagensPage() {
                     <div className="text-white text-lg w-[40%] ">
                         <Cards img={imagemRelativa} loading="lazy" />
                         <h1 className="text-[#FFFF00] text-center font-inter text-xl pt-2">
-                            {decodeURIComponent(personagem)}
+                            {decodeURIComponent(nave)}
                         </h1>
                     </div>
+
                     <div className=" container bg-blue-900/40 w-[50%]  rounded-2xl text-white ">
                         <div className="font-inter text-xl flex flex-col gap-3 pl-5">
                             {
                                 <h1 className="font-inter font-extrabold text-center">
-                                    Informações de {char.name}
+                                    Informações de {ships.name}
                                 </h1>
+                            }{" "}
+                            {<p>Nome: {ships.name}.</p>}
+                            {<p>Modelo: {ships.model}.</p>}
+                            {<p>Classe da nave: {ships.starship_class}.</p>}
+                            {<p>Fabricante da nave: {ships.manufacturer}.</p>}
+                            {<p>Custo: {ships.cost_in_credits}.</p>}
+                            {<p>Tamanho: {ships.length}m.</p>}
+                            {<p>Tripulação: {ships.crew}.</p>}
+                            {<p>Passageiros: {ships.passengers}.</p>}
+                            {
+                                <p>
+                                    Velocidade máxima na atmosfera{" "}
+                                    {ships.max_atmosphering_speed}.
+                                </p>
                             }
-                            {<p>Nome: {char.name}.</p>}
-                            {<p>Altura: {char.height}m.</p>}
-                            {<p>Peso: {char.mass}kg.</p>}
-                            {<p>Gênero: {gender}.</p>}
-                            {<p>Cor do cabelo: {hair}.</p>}
-                            {<p>Cor da pele: {skin}.</p>}
-                            {<p>Cor do olho: {eyes}.</p>}
-                            {<p>Criado em: {char.created.slice(0, 10)}.</p>}
-                            {<p>Editado em: {char.edited.slice(0, 10)}.</p>}
-                            {<p>Data de nascimento: {char.birth_year}.</p>}
-                            {/* Resultados que são link de API*/}
-                            {<p>Veiculos: {vehicles.join(", ")}.</p>}
+                            {
+                                <p>
+                                    Classe de Hyperdrive:{" "}
+                                    {ships.hyperdrive_rating}.
+                                </p>
+                            }
+                            {<p>MGLT {ships.MGLT}.</p>}
+                            {
+                                <p>
+                                    Capacidade de carga: {ships.cargo_capacity}
+                                    KG.
+                                </p>
+                            }
+                            {<p>Consumo: {ships.consumables}.</p>}
                             {
                                 <div>
                                     <p>Filmes:</p>
@@ -132,14 +116,23 @@ export default function PersonagensPage() {
                                     ))}
                                 </div>
                             }
-                            {<p>Espécie: {species}.</p>}
-                            {/* Resultados que devem ser clicáveis, segundo o desafio. */}
+                            {<p>Criado em: {ships.created}.</p>}
+                            {<p>Editado em: {ships.edited}.</p>}
+                            {/* Precisa ser clicável, segundo o desafio */}
                             {
-                                <Link>
-                                    <p>Planeta de nascimento: {home}.</p>
-                                </Link>
+                                <div>
+                                    <p>Pilotos:</p>
+                                    {peoples.map((people, index) => (
+                                        <div key={index}>
+                                            <span>{people}</span>
+                                            {index < peoples.length - 1 && (
+                                                <br />
+                                            )}{" "}
+                                            {/* Adiciona a quebra de linha se não for o último filme */}
+                                        </div>
+                                    ))}
+                                </div>
                             }
-                            {<p>Naves: {ships.join(", ")}.</p>}
                         </div>
                     </div>
                     <div className="absolute left-24 top-28 w-10 rounded-full text-white text-center bg-blue-900/40">
