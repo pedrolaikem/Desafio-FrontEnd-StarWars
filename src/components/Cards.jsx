@@ -5,17 +5,23 @@ import CardCover from '@mui/joy/CardCover';
 import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
 
-export default function Cards({ img, title, align}) {
+export default function Cards({ img, title, align, transform, width}) {
   return (
     <Box
       component="ul"
-      sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', p: 0, m: 0 }}
-      className='hover:-translate-y-12'
+      sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', p: 0, m: 0 , 
+      transition: 'translate 0.5s ease-in-out', 
+      '&:hover': {
+        transform: transform,
+        transition: 'all 0.25s ease-in-out'
+      }
+    }}
       
     >
-      <Card component="li" sx={{ minWidth: 300, flexGrow: 1 }}>
+      <Card component="li" sx={{ minWidth: 300, flexGrow: 1, width: width}}>
         <CardCover>
           <img
+            
             src={img}
             loading="lazy"
             alt=""
@@ -27,7 +33,7 @@ export default function Cards({ img, title, align}) {
           <Typography
             level="body-lg"
             fontWeight="lg"
-            textColor="#fff"
+            textColor={"#fff"}
             textAlign={align}
             mt={{ xs: 12, sm: 18 }}
             

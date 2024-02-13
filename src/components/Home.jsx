@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import Obiwan from './imgs/Obiwan.png'
 import Cards from './Cards'
@@ -23,9 +24,9 @@ function Home() {
                                     Seu conteúdo de Star Wars
                                 </h1>
                                 <div className='flex gap-12'>
-                                    <a href="/personagens=page1"><Cards img={Yoda} title="Personagens"/></a>
-                                    <a href="/planetas"><Cards img={Planeta} title="Planetas"/></a>
-                                    <a href="/naves"><Cards img={Millenium} title="Naves"/></a>
+                                    <Link to='/personagens=page1'><Cards img={Yoda} title="Personagens" transform={'translateY(-24px)'}/></Link>
+                                    <Link to='/planetas=page1'><Cards img={Planeta} title="Planetas" transform={'translateY(-24px)'}/></Link>
+                                    <Link to="/naves=page1"><Cards img={Millenium} title="Naves" transform={'translateY(-24px)'}/></Link>
                                 </div> 
                             </div>
                         </div>      
