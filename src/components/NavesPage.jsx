@@ -18,18 +18,18 @@ export default function NavesPage() {
 
     const imagemRelativa = imagem.replace(".", "/src/components");
 
-    // States settados para as informações do personagem.
+    // States settados para as informações da nave.
     const [ships, setShips] = useState();
     const [loading, setLoading] = useState(true);
     const [films, setFilms] = useState([]);
     const [peoples, setPeoples] = useState([]);
 
-    // variaveis para gerar os links dos 82 personagens
+    // variaveis para gerar os links das naves
     const folder = imagem.slice(8, 9);
     const indexImg = imagem.slice(10, 11);
     let adjustedIndex = adjustIndex(folder, indexImg);
 
-    //Função para gerar a URL da API com base no número do personagem
+    //Função para gerar a URL da API com base no número da nave
     const generateAPIURL = (shipNumber) => {
         return `https://swapi.dev/api/starships/${shipNumber}/`;
     };

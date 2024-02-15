@@ -12,7 +12,6 @@ import Stack from "@mui/material/Stack";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function Naves({ apiUrl, folder }) {
-
     const [ships, setShips] = useState();
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
@@ -35,6 +34,7 @@ export default function Naves({ apiUrl, folder }) {
         };
         starWarsShip();
     }, [apiUrl]);
+    
     return (
         <div className="flex flex-col items-center justify-center w-screen h-[90vh] gap-24 ">
             <h1 className="text-white text-6xl">Naves</h1>
@@ -61,7 +61,7 @@ export default function Naves({ apiUrl, folder }) {
                                     {ship.name}
                                 </h1>
                                 <div className="absolute left-24 top-28 w-10 rounded-full text-white text-center bg-blue-900/40">
-                                    <Link onClick={() => history.back()}>
+                                    <Link to="/">
                                         <ArrowBackIcon fontSize="large" />
                                     </Link>
                                 </div>

@@ -63,7 +63,7 @@ export default function Planetas({ apiUrl, folder }) {
                                     {planeta.name}
                                 </h1>
                                 <div className="absolute left-24 top-28 w-10 rounded-full text-white text-center bg-blue-900/40">
-                                    <Link onClick={() => history.back()}>
+                                    <Link to='/' onClick={() => history.back()}>
                                         <ArrowBackIcon fontSize="large" />
                                     </Link>
                                 </div>

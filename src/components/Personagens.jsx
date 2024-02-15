@@ -21,6 +21,7 @@ export default function Personagens({ apiUrl, folder, personagem }) {
         navigate(`/personagens=page${value}`);
     };
 
+    
     useEffect(() => {
         const starWarsCharacter = async () => {
             try {
@@ -62,7 +63,7 @@ export default function Personagens({ apiUrl, folder, personagem }) {
                                     {personagem.name}
                                 </h1>
                                 <div className="absolute left-24 top-28 w-10 rounded-full text-white text-center bg-blue-900/40">
-                                    <Link onClick={() => history.back()}>
+                                    <Link to="/">
                                         <ArrowBackIcon fontSize="large" />
                                     </Link>
                                 </div>
