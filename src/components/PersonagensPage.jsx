@@ -6,9 +6,9 @@ import Cards from "./Cards";
 import CircularProgress from "@mui/joy/CircularProgress";
 import {
     formatGender,
-    formatHairColor,
     formatEyeColor,
     formatSkinColor,
+    formatHairColor,
     fetchVehicleNames,
     fetchFilmTitles,
     fetchSpeciesNames,
@@ -19,8 +19,6 @@ import { Link } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PlanetasPage from "./PlanetasPage.jsx";
 import linkToPlanet from "./linkToPlanet.js";
-import linkToShip from "./linkToShip.js";
-import { adjustIndex } from "./adjustIndex.js";
 
 export default function PersonagensPage() {
     //Variaveis
@@ -243,8 +241,8 @@ export default function PersonagensPage() {
         return `https://swapi.dev/api/people/${characterNumber}/`;
     };
 
+    //Chamando função linkToPlanet para pegar os valores de pasta e newUrl
     const { pasta, newUrl } = linkToPlanet(urlPlanet);
-    // const { pasta: pastaNave, newUrl: newUrlNave } = linkToShip(urlNaves);
 
     const mapStarshipLinks = (starshipLinks) => {
         return starshipLinks.map((link) => {
@@ -303,82 +301,85 @@ export default function PersonagensPage() {
                     <CircularProgress />
                 </div>
             ) : (
-                <div className="grid grid-cols-2 items-center justify-items-center h-[90vh]">
-                    <div className="text-white text-lg w-[40%] ">
-                        <Cards img={imagemRelativa} loading="lazy" />
-                        <h1 className="text-[#FFFF00] text-center font-inter text-xl pt-2">
-                            {decodeURIComponent(personagem)}
-                        </h1>
-                    </div>
-                    <div className=" container bg-blue-900/40 w-[50%]  rounded-2xl text-white ">
-                        <div className="font-inter text-xl flex flex-col gap-3 pl-5">
-                            {
-                                <h1 className="font-inter font-extrabold text-center">
-                                    Informações de {char.name}
-                                </h1>
-                            }
-                            {<p>Nome: {char.name}.</p>}
-                            {<p>Altura: {char.height}m.</p>}
-                            {<p>Peso: {char.mass}kg.</p>}
-                            {<p>Gênero: {gender}.</p>}
-                            {<p>Cor do cabelo: {hair}.</p>}
-                            {<p>Cor da pele: {skin}.</p>}
-                            {<p>Cor do olho: {eyes}.</p>}
-                            {<p>Criado em: {char.created.slice(0, 10)}.</p>}
-                            {<p>Editado em: {char.edited.slice(0, 10)}.</p>}
-                            {<p>Data de nascimento: {char.birth_year}.</p>}
-                            {/* Resultados que são link de API*/}
-                            {<p>Veiculos: {vehicles.join(", ")}.</p>}
-                            {
-                                <div>
-                                    <p>Filmes:</p>
-                                    {films.map((film, index) => (
-                                        <div key={index}>
-                                            <span>{film}</span>
-                                            {index < films.length - 1 && (
-                                                <br />
-                                            )}{" "}
-                                            {/* Adiciona a quebra de linha se não for o último filme */}
-                                        </div>
-                                    ))}
-                                </div>
-                            }
-                            {<p>Espécie: {species}.</p>}
-                            {/* Resultados que devem ser clicáveis, segundo o desafio. */}
-                            {home ? (
-                                <Link
-                                    className="underline"
-                                    to={`/planetas/${encodeURIComponent(
-                                        home
-                                    )}/${encodeURIComponent(
-                                        `./planetas/${pasta}/${newUrl}.jpg`
-                                    )}`}
-                                >
-                                    Planeta de nascimento: {home}.
-                                </Link>
-                            ) : (
-                                <p>Informação de casa não disponível.</p>
-                            )}
-
-                            {folderIndexImgArray.map((item, index) => (
-                                <Link
-                                    to={`/naves/${encodeURIComponent(
-                                        ships[index]
-                                    )}/${encodeURIComponent(
-                                        `./naves/${item.folder}/${item.indexImg}.jpg`
-                                    )}`}
-                                >
-                                    <p className="underline">
-                                        Naves: {ships[index]}.
-                                    </p>
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-                    <div className="absolute left-24 top-28 w-10 rounded-full text-white text-center bg-blue-900/40">
-                        <Link onClick={() => history.back()}>
+                <div>
+                    <div className="float-left mt-16 ml-12 sm:ml-0 w-10 rounded-full text-white text-center bg-blue-900/40">
+                        <Link to="/">
                             <ArrowBackIcon fontSize="large" />
                         </Link>
+                    </div>
+                    <div className="grid grid-cols-2 items-center justify-items-center h-[90vh] lg:grid-cols-1 lg:pt-2">
+                        <div className="text-white text-lg w-[40%] ">
+                            <Cards img={imagemRelativa} loading="lazy" />
+                            <h1 className="text-[#FFFF00] text-center font-inter text-xl pt-2">
+                                {decodeURIComponent(personagem)}
+                            </h1>
+                        </div>
+                        <div className=" bg-blue-900/40 rounded-2xl text-white sm:mr-7">
+                            <div className="font-inter text-xl flex flex-col gap-3 pl-5 ">
+                                {
+                                    <h1 className="font-inter font-extrabold text-center">
+                                        Informações de {char.name}
+                                    </h1>
+                                }
+                                {<p>Nome: {char.name}.</p>}
+                                {<p>Altura: {char.height}m.</p>}
+                                {<p>Peso: {char.mass}kg.</p>}
+                                {<p>Gênero: {gender}.</p>}
+                                {<p>Cor do cabelo: {hair}.</p>}
+                                {<p>Cor da pele: {skin}.</p>}
+                                {<p>Cor do olho: {eyes}.</p>}
+                                {<p>Criado em: {char.created.slice(0, 10)}.</p>}
+                                {<p>Editado em: {char.edited.slice(0, 10)}.</p>}
+                                {<p>Data de nascimento: {char.birth_year}.</p>}
+                                {/* Resultados que são link de API*/}
+                                {<p>Veiculos: {vehicles.join(", ")}.</p>}
+                                {
+                                    <div>
+                                        <p>Filmes:</p>
+                                        {films.map((film, index) => (
+                                            <div key={index}>
+                                                <span>{film}</span>
+                                                {index < films.length - 1 && (
+                                                    <br />
+                                                )}{" "}
+                                                {/* Adiciona a quebra de linha se não for o último filme */}
+                                            </div>
+                                        ))}
+                                    </div>
+                                }
+                                {<p>Espécie: {species}.</p>}
+                                {/* Resultados que devem ser clicáveis, segundo o desafio. */}
+                                {home ? (
+                                    <Link
+                                        className="underline"
+                                        to={`/planetas/${encodeURIComponent(
+                                            home
+                                        )}/${encodeURIComponent(
+                                            `./planetas/${pasta}/${newUrl}.jpg`
+                                        )}`}
+                                    >
+                                        Planeta de nascimento: {home}.
+                                    </Link>
+                                ) : (
+                                    <p>Informação de casa não disponível.</p>
+                                )}
+
+                                {folderIndexImgArray.map((item, index) => (
+                                    <Link
+                                        to={`/naves/${encodeURIComponent(
+                                            ships[index]
+                                        )}/${encodeURIComponent(
+                                            `./naves/${item.folder}/${item.indexImg}.jpg`
+                                        )}`}
+                                    >   
+                                        <p>Naves:</p>
+                                        <p className="underline">
+                                           {ships[index]}.
+                                        </p>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}

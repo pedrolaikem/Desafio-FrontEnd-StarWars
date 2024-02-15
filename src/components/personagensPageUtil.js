@@ -4,18 +4,34 @@ export const formatSkinColor = (skinColor) => {
     switch (skinColor) {
         case "fair":
             return "Pele clara";
+        case "light":
+            return "Pele clara";
+        case "blue":
+            return "Azul";
+        case "brown":
+            return "Moreno";
+        case "dark":
+            return "Escuro";
         case "white":
             return "Branco";
         case "gold":
             return "Dourado";
         case "caucasian":
             return "Caucasiano";
+        case "green":
+            return "Verde";
         case "black":
             return "Preto";
         case "grey":
             return "Cinza";
         case "pale":
             return "Pálida";
+        case "metal":
+            return "Pele de metal";
+        case "orange":
+            return "Laranja";
+        case "tan":
+            return "Moreno";
         default:
             return "Desconhecido";
     }
@@ -36,12 +52,18 @@ export const formatHairColor = (hairColor) => {
     switch (hairColor) {
         case "blond":
             return "Loiro";
+        case "blonde":
+            return "Loiro";
         case "brown":
             return "Castanho";
         case "black":
             return "Preto";
         case "red":
             return "Vermelho";
+        case "white":
+            return "Branco";
+        case "grey":
+            return "Cinza";
         default:
             return "Não possui ou desconhecido";
     }
@@ -51,6 +73,16 @@ export const formatEyeColor = (eyeColor) => {
     switch (eyeColor) {
         case "blue":
             return "Azul";
+        case "blue-gray":
+            return "Azul";
+        case "gold":
+            return "Dourado";
+        case "orange":
+            return "Laranja";
+        case "pink":
+            return "Rosa";
+        case "red":
+            return "Vermelho";
         case "yellow":
             return "Amarelo";
         case "brown":
