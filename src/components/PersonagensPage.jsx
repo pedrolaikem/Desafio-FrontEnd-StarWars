@@ -381,7 +381,7 @@ export default function PersonagensPage() {
                                         )}`}
                                     >
                                         <p className="underline">
-                                            Naves: {peoples[index]}.
+                                            Naves: {ships[index]}.
                                         </p>
                                     </Link>
                                 ))}

@@ -21,10 +21,10 @@ function Navbar() {
                         className="w-[91px] 2xl:w-[75px] lg:w-[60px] "
                     />
                 </a>
-                {/* Darth Vader img */}
+                {/* Darth Vader */}
                 <img
                     src={DarthVader}
-                    alt=""
+                    alt="DarthVader"
                     className="2xl:w-[40px] w-[50px] mr-12"
                 />
             </div>
