@@ -550,6 +550,7 @@ export default function NavesPage() {
     useEffect(() => {
         const getShips = async () => {
             try {
+                //Settar informações da API
                 setLoading(true);
                 const res = await axios.get(generateAPIURL(adjustedIndex));
                 setShips(res.data);
@@ -574,11 +575,14 @@ export default function NavesPage() {
                 </div>
             ) : (
                 <div>
+                    {/* Voltar página */}
                     <div className="float-left mt-16 ml-12 sm:ml-0 w-10 rounded-full text-white text-center bg-blue-900/40">
                         <Link to="/">
                             <ArrowBackIcon fontSize="large" />
                         </Link>
                     </div>
+                    {/* End voltar página */}
+                    {/* Personagem */}
                     <div className="grid grid-cols-2 items-center justify-items-center h-[90vh] lg:grid-cols-1 lg:pt-2">
                         <div className="text-white text-lg w-[40%] ">
                             <Cards img={imagemRelativa} loading="lazy" />
@@ -588,6 +592,7 @@ export default function NavesPage() {
                         </div>
 
                         <div className=" bg-blue-900/40  rounded-2xl text-white  sm:mr-7">
+                            {/* Informações */}
                             <div className="font-inter text-xl flex flex-col gap-3 pl-5">
                                 {
                                     <h1 className="font-inter font-extrabold text-center">
@@ -647,6 +652,7 @@ export default function NavesPage() {
                                 {/* Precisa ser clicável, segundo o desafio */}
                                 {
                                     <div>
+                                        {/* Map para comparar o link com o banco de dados, e receber o folder e o indexImg corretos */}
                                         {folderIndexImgArray.map(
                                             (item, index) => (
                                                 <Link
@@ -665,9 +671,11 @@ export default function NavesPage() {
                                         )}
                                     </div>
                                 }
+                                {/* End informações */}
                             </div>
                         </div>
                     </div>
+                    {/* End personagem */}
                 </div>
             )}
         </div>

@@ -23,7 +23,7 @@ export default function Cards({ img, title, align, transform, width }) {
             }}
         >
             <Card
-                className="w-[300px] 2xl:w-[240px] xl:w-[200px] lg:w-[170px] md:w-[250px] "
+                className="w-[300px] 2xl:w-[240px] xl:w-[200px] lg:w-[150px] md:w-[250px] "
                 component="li"
                 sx={{ minWidth: 0, flexGrow: 1, width: width }}
             >

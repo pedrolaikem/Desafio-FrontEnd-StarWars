@@ -12,9 +12,9 @@ import Stack from "@mui/material/Stack";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function Naves({ apiUrl, folder }) {
-    const [ships, setShips] = useState();
-    const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
+    const [ships, setShips] = useState(); //Setar informação do array de naves
+    const [loading, setLoading] = useState(true); //State para controlar o loading
+    const navigate = useNavigate(); //UseNavigate para o pagination
 
     const handleChange = (event, value) => {
         navigate(`/naves=page${value}`);
@@ -23,6 +23,7 @@ export default function Naves({ apiUrl, folder }) {
     useEffect(() => {
         const starWarsShip = async () => {
             try {
+                //Settar informações da API e passando para os States
                 setLoading(true);
                 const res = await axios.get(apiUrl);
                 setShips(res.data.results);
@@ -37,11 +38,14 @@ export default function Naves({ apiUrl, folder }) {
 
     return (
         <div>
+            {/* Voltar página */}
             <div className="float-left  mt-16 sm:mt-8 ml-12 sm:ml-2 w-10 rounded-full text-white text-center bg-blue-900/40">
                 <Link to="/">
                     <ArrowBackIcon fontSize="large" />
                 </Link>
             </div>
+            {/* End voltar página */}
+            {/* Naves */}
             <div className="flex flex-col items-center justify-center w-screen h-[70vh] lg:h-[100vh] md:h-[140vh] sm:h-[120vh] gap-24 lg:gap-8 sm:gap-4 ">
                 <h1 className="text-white text-6xl sm:text-4xl">Naves</h1>
                 {loading ? ( // Verificando se está carregando os novos dados
@@ -76,6 +80,8 @@ export default function Naves({ apiUrl, folder }) {
                 ) : (
                     <CircularProgress />
                 )}
+                {/* End naves */}
+                {/* Pagination */}
                 <div className=" bg-zinc-300 rounded-3xl ">
                     <Stack spacing={2}>
                         <Pagination
@@ -86,6 +92,7 @@ export default function Naves({ apiUrl, folder }) {
                         />
                     </Stack>
                 </div>
+                {/* End pagination */}
             </div>
         </div>
     );

@@ -548,6 +548,7 @@ export default function PlanetasPage() {
     useEffect(() => {
         const getPlanet = async () => {
             try {
+                //Settar informações da API
                 setLoading(true);
                 const res = await axios.get(generateAPIURL(adjustedIndex));
                 setPlanet(res.data);
@@ -573,11 +574,14 @@ export default function PlanetasPage() {
                 </div>
             ) : (
                 <div>
+                    {/* Voltar página */}
                     <div className="float-left mt-16 ml-12 sm:ml-0 w-10 rounded-full text-white text-center bg-blue-900/40">
                         <Link to="/">
                             <ArrowBackIcon fontSize="large" />
                         </Link>
                     </div>
+                    {/* End Voltar página */}
+                    {/* Planetas */}
                     <div className="grid grid-cols-2 items-center justify-items-center h-[90vh] lg:grid-cols-1 lg:pt-2">
                         <div className="text-white text-lg w-[40%] ">
                             <Cards img={imagemRelativa} loading="lazy" />
@@ -585,7 +589,7 @@ export default function PlanetasPage() {
                                 {decodeURIComponent(planeta)}
                             </h1>
                         </div>
-
+                        {/* Informações */}
                         <div className=" bg-blue-900/40 rounded-2xl text-white sm:mr-7">
                             <div className="font-inter text-xl flex flex-col gap-3 pl-5">
                                 {
@@ -636,6 +640,7 @@ export default function PlanetasPage() {
                                 {/* Links que tem ser clicáveis, segundo o desafio */}
                                 {
                                     <div>
+                                        {/* Map para comparar o link com o banco de dados, e receber o folder e o indexImg corretos */}
                                         {folderIndexImgArray.map(
                                             (item, index) => (
                                                 <Link
@@ -652,10 +657,12 @@ export default function PlanetasPage() {
                                                 </Link>
                                             )
                                         )}
+                                        {/* End informações */}
                                     </div>
                                 }
                             </div>
                         </div>
+                        {/* End planetas */}
                     </div>
                 </div>
             )}

@@ -1,5 +1,5 @@
 import axios from "axios";
-
+//Tratamento de casos
 export const formatSkinColor = (skinColor) => {
     switch (skinColor) {
         case "fair":
@@ -36,6 +36,7 @@ export const formatSkinColor = (skinColor) => {
             return "Desconhecido";
     }
 };
+
 
 export const formatGender = (gender) => {
     switch (gender) {
@@ -104,6 +105,7 @@ export const formatEyeColor = (eyeColor) => {
     }
 };
 
+//Fazer o map do array, desestruturando eles e devolvendo os nomes das informações que vieram em array.
 export const fetchVehicleNames = async (res, setVehicles) => {
     if (res.data.vehicles.length > 0) {
         const vehicleNames = await Promise.all(

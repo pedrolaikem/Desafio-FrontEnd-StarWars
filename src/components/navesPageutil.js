@@ -1,5 +1,6 @@
 import axios from "axios";
 
+//Fazer o map do array, desestruturando eles e devolvendo os nomes das informações que vieram em array.
 export const fetchFilmTitles = async (res, setFilms) => {
     if (res.data.films.length > 0) {
         const filmsNames = await Promise.all(

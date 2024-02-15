@@ -21,10 +21,10 @@ import PlanetasPage from "./PlanetasPage.jsx";
 import linkToPlanet from "./linkToPlanet.js";
 
 export default function PersonagensPage() {
-    //Variaveis
     //Parametros de rota
 
     const { personagem, imagem } = useParams();
+    //Banco de dados
     const starshipData2 = [
         {
             apiUrl: "https://swapi.dev/api/starships/2/",
@@ -207,6 +207,7 @@ export default function PersonagensPage() {
             indexImg: "5",
         },
     ];
+
     //Imagem com path modificado que está sendo recebido dos Parametros de rota.
 
     const imagemRelativa = imagem.replace(".", "/src/components");
@@ -230,6 +231,7 @@ export default function PersonagensPage() {
     const folder = imagem.slice(14, 15);
     const indexImg = imagem.slice(16, 17);
 
+    //Função para ajustar o index
     let adjustedIndex = (parseInt(folder) - 1) * 10 + parseInt(indexImg) + 1;
     const errorIndex = 17;
     if (adjustedIndex >= errorIndex) {
@@ -244,6 +246,8 @@ export default function PersonagensPage() {
     //Chamando função linkToPlanet para pegar os valores de pasta e newUrl
     const { pasta, newUrl } = linkToPlanet(urlPlanet);
 
+    //Função para achar a url correspondente que vem no array de naves para poder ir para a próxima página
+    //comparando com o bando de dados criado.
     const mapStarshipLinks = (starshipLinks) => {
         return starshipLinks.map((link) => {
             // Encontre o objeto correspondente nos dados das naves espaciais
@@ -261,7 +265,6 @@ export default function PersonagensPage() {
     };
     const starshipLinks = urlNaves;
     const folderIndexImgArray = mapStarshipLinks(starshipLinks);
-    console.log(folderIndexImgArray);
 
     useEffect(() => {
         const getCharacter = async () => {
@@ -302,11 +305,14 @@ export default function PersonagensPage() {
                 </div>
             ) : (
                 <div>
+                    {/* Voltar página */}
                     <div className="float-left mt-16 ml-12 sm:ml-0 w-10 rounded-full text-white text-center bg-blue-900/40">
                         <Link to="/">
                             <ArrowBackIcon fontSize="large" />
                         </Link>
                     </div>
+                    {/* End voltar página */}
+                    {/* Personagem */}
                     <div className="grid grid-cols-2 items-center justify-items-center h-[90vh] lg:grid-cols-1 lg:pt-2">
                         <div className="text-white text-lg w-[40%] ">
                             <Cards img={imagemRelativa} loading="lazy" />
@@ -316,6 +322,7 @@ export default function PersonagensPage() {
                         </div>
                         <div className=" bg-blue-900/40 rounded-2xl text-white sm:mr-7">
                             <div className="font-inter text-xl flex flex-col gap-3 pl-5 ">
+                                {/* Informações */}
                                 {
                                     <h1 className="font-inter font-extrabold text-center">
                                         Informações de {char.name}
@@ -349,6 +356,7 @@ export default function PersonagensPage() {
                                 }
                                 {<p>Espécie: {species}.</p>}
                                 {/* Resultados que devem ser clicáveis, segundo o desafio. */}
+                                {/* Map para receber o planeta de nascimento(como não é um array não precisei desestruturar igual nos outros) */}
                                 {home ? (
                                     <Link
                                         className="underline"
@@ -363,7 +371,7 @@ export default function PersonagensPage() {
                                 ) : (
                                     <p>Informação de casa não disponível.</p>
                                 )}
-
+                                {/* Map para comparar o link com o banco de dados, e receber o folder e o indexImg corretos */}
                                 {folderIndexImgArray.map((item, index) => (
                                     <Link
                                         to={`/naves/${encodeURIComponent(
@@ -371,16 +379,17 @@ export default function PersonagensPage() {
                                         )}/${encodeURIComponent(
                                             `./naves/${item.folder}/${item.indexImg}.jpg`
                                         )}`}
-                                    >   
-                                        <p>Naves:</p>
+                                    >
                                         <p className="underline">
-                                           {ships[index]}.
+                                            Naves: {peoples[index]}.
                                         </p>
                                     </Link>
                                 ))}
                             </div>
+                            {/* End informações */}
                         </div>
                     </div>
+                    {/* End personagem */}
                 </div>
             )}
         </div>

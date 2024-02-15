@@ -1,6 +1,6 @@
 export function adjustIndex(folder, indexImg) {
     let adjustedIndex = (parseInt(folder) - 1) * 10 + parseInt(indexImg) + 1;
-
+    // Script para ajustar o index
     if (adjustedIndex >= 1) {
         adjustedIndex++;
     }
