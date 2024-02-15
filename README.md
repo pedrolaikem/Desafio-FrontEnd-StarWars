@@ -9,8 +9,11 @@ Currently, two official plugins are available:
 
 Esse projeto utiliza Vite para utilizar React.
 
-Após baixar os arquivos, usar npm run dev no terminal.
+Passo 1: Baixar os arquivos desse repositório.
+Passo 2: Abrir através do VScode ou de sua IDE favorita.
+Passo 3: Rodar o projeto com "npm run dev" no terminal.
 
+Em seu localhost o projeto deve abrir.
 A página que deve abrir é:
 
 ![Screenshot](printHomePage.png)
