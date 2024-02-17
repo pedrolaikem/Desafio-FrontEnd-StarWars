@@ -19,194 +19,12 @@ import { Link } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PlanetasPage from "./PlanetasPage.jsx";
 import linkToPlanet from "./linkToPlanet.js";
+import { mapStarshipLinks } from "./starshipData.js";
 
 export default function PersonagensPage() {
     //Parametros de rota
 
     const { personagem, imagem } = useParams();
-    //Banco de dados
-    const starshipData2 = [
-        {
-            apiUrl: "https://swapi.dev/api/starships/2/",
-            folder: "1",
-            indexImg: "0",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/3/",
-            folder: "1",
-            indexImg: "1",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/5/",
-            folder: "1",
-            indexImg: "2",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/9/",
-            folder: "1",
-            indexImg: "3",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/10/",
-            folder: "1",
-            indexImg: "4",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/11/",
-            folder: "1",
-            indexImg: "5",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/12/",
-            folder: "1",
-            indexImg: "6",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/13/",
-            folder: "1",
-            indexImg: "7",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/15/",
-            folder: "1",
-            indexImg: "8",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/17/",
-            folder: "1",
-            indexImg: "9",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/21/",
-            folder: "2",
-            indexImg: "0",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/22/",
-            folder: "2",
-            indexImg: "1",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/23/",
-            folder: "2",
-            indexImg: "2",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/27/",
-            folder: "2",
-            indexImg: "3",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/28/",
-            folder: "2",
-            indexImg: "4",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/29/",
-            folder: "2",
-            indexImg: "5",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/31/",
-            folder: "2",
-            indexImg: "6",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/32/",
-            folder: "2",
-            indexImg: "7",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/39/",
-            folder: "2",
-            indexImg: "8",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/40/",
-            folder: "2",
-            indexImg: "9",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/41/",
-            folder: "3",
-            indexImg: "0",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/43/",
-            folder: "3",
-            indexImg: "1",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/47/",
-            folder: "3",
-            indexImg: "2",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/48/",
-            folder: "3",
-            indexImg: "3",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/49/",
-            folder: "3",
-            indexImg: "4",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/52/",
-            folder: "3",
-            indexImg: "5",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/58/",
-            folder: "3",
-            indexImg: "6",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/59/",
-            folder: "3",
-            indexImg: "7",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/61/",
-            folder: "3",
-            indexImg: "8",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/63/",
-            folder: "3",
-            indexImg: "9",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/64/",
-            folder: "4",
-            indexImg: "0",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/65/",
-            folder: "4",
-            indexImg: "1",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/66/",
-            folder: "4",
-            indexImg: "2",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/68/",
-            folder: "4",
-            indexImg: "3",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/74/",
-            folder: "4",
-            indexImg: "4",
-        },
-        {
-            apiUrl: "https://swapi.dev/api/starships/75/",
-            folder: "4",
-            indexImg: "5",
-        },
-    ];
 
     //Imagem com path modificado que está sendo recebido dos Parametros de rota.
 
@@ -227,7 +45,7 @@ export default function PersonagensPage() {
     const [urlPlanet, setUrlPlanet] = useState("");
     const [urlNaves, setUrlNaves] = useState([]);
 
-    // variaveis para gerar os links dos 82 personagens
+    // Variaveis para gerar os links dos 82 personagens
     const folder = imagem.slice(14, 15);
     const indexImg = imagem.slice(16, 17);
 
@@ -248,23 +66,9 @@ export default function PersonagensPage() {
 
     //Função para achar a url correspondente que vem no array de naves para poder ir para a próxima página
     //comparando com o bando de dados criado.
-    const mapStarshipLinks = (starshipLinks) => {
-        return starshipLinks.map((link) => {
-            // Encontre o objeto correspondente nos dados das naves espaciais
-            const starshipData = Object.values(starshipData2).find(
-                (data) => data.apiUrl === link
-            );
-            if (!starshipData) {
-                console.error(`Dados não encontrados para a URL: ${link}`);
-                return null;
-            }
 
-            const { folder, indexImg } = starshipData;
-            return { folder, indexImg };
-        });
-    };
-    const starshipLinks = urlNaves;
-    const folderIndexImgArray = mapStarshipLinks(starshipLinks);
+    //Função para desestruturar o array de URLs e poder utilizar no map para os nomes das naves serem clicáveis.
+    const folderIndexImgArray = mapStarshipLinks(urlNaves);
 
     useEffect(() => {
         const getCharacter = async () => {
@@ -307,7 +111,7 @@ export default function PersonagensPage() {
                 <div>
                     {/* Voltar página */}
                     <div className="float-left mt-16 ml-12 sm:ml-0 w-10 rounded-full text-white text-center bg-blue-900/40">
-                        <Link to="/">
+                        <Link onClick={() => history.back()}>
                             <ArrowBackIcon fontSize="large" />
                         </Link>
                     </div>
@@ -372,6 +176,7 @@ export default function PersonagensPage() {
                                     <p>Informação de casa não disponível.</p>
                                 )}
                                 {/* Map para comparar o link com o banco de dados, e receber o folder e o indexImg corretos */}
+                                <p>Naves:</p>
                                 {folderIndexImgArray.map((item, index) => (
                                     <Link
                                         to={`/naves/${encodeURIComponent(
@@ -379,9 +184,9 @@ export default function PersonagensPage() {
                                         )}/${encodeURIComponent(
                                             `./naves/${item.folder}/${item.indexImg}.jpg`
                                         )}`}
-                                    >
+                                    >   
                                         <p className="underline">
-                                            Naves: {ships[index]}.
+                                            {ships[index]}.
                                         </p>
                                     </Link>
                                 ))}
