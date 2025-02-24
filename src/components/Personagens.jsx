@@ -68,7 +68,7 @@ export default function Personagens({ apiUrl, folder, personagem }) {
                             >
                                 <Cards
                                     key={index}
-                                    img={`components/personagens/${folder}/${index}.jpg`}
+                                    img={`src/components/personagens/${folder}/${index}.jpg`}
                                     transform={"translateY(-24px)"}
                                 />
                                 <div>
